@@ -2,11 +2,17 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dto.EmployeeDto;
+import com.example.demo.entity.Employee;
+import com.example.demo.mapper.EmployeeMapper;
+import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -14,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
+    private final EmployeeRepository employeeRepository;
     private EmployeeService employeeService;
 
     @PostMapping
@@ -31,24 +38,23 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<EmployeeDto> getAllEmployees()
+    public ResponseEntity<List<EmployeeDto>> getAllEmployees()
     {
-        EmployeeDto employeeDto = employeeService.getAllEmployees();
-        return ResponseEntity.ok(employeeDto);
+        List<EmployeeDto> employeeList = employeeService.getAllEmployees();
+        return ResponseEntity.ok(employeeList);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<EmployeeDto> updateEmployees(@PathVariable("id") Long employeeId)
-    {
-        EmployeeDto employeeDto = employeeService.updateEmployees(employeeId);
-
-        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") Long employeeId,
+            @RequestBody EmployeeDto employeeDto) {
+        EmployeeDto updatedEmployee = employeeService.updateEmployee(employeeId, employeeDto);
+        return ResponseEntity.ok(updatedEmployee);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<EmployeeDto> deleteEmployees(@PathVariable("id")Long employeeId)
     {
-        EmployeeDto employeeDto = employeeService.deleteEmployees(employeeId);
+        EmployeeDto employeeDto = employeeService.deleteEmployee(employeeId);
         return ResponseEntity.ok(employeeDto);
     }
 }

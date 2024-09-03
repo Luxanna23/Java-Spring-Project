@@ -36,27 +36,33 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto getAllEmployees()
+    public List<EmployeeDto> getAllEmployees()
     {
-        List<Employee> employees = employeeRepository.findAll();
-        return EmployeeMapper.maptoEmployeeDto(employees);
+        List<Employee> employeeList = employeeRepository.findAll();
+        return EmployeeMapper.maptoEmployeeListDto(employeeList);
     }
 
     @Override
-    public EmployeeDto updateEmployees(Long employeeId)
-    {
+    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto employeeDto) {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() ->
-                        new RessourceNotFoundException("Employee is not found with id" + employeeId));
-        return
+                        new RessourceNotFoundException("Employee not found with id: " + employeeId));
+
+        employee.setFirstName(employeeDto.getFirstName());
+        employee.setLastName(employeeDto.getLastName());
+        employee.setEmail(employeeDto.getEmail());
+        employee.setDepartementId(employeeDto.getDepartementId());
+
+        Employee updatedEmployee = employeeRepository.save(employee);
+        return EmployeeMapper.maptoEmployeeDto(updatedEmployee);
     }
 
     @Override
-    public EmployeeDto deleteEmployees(Long employeeId)
-    {
+    public EmployeeDto deleteEmployee(Long employeeId) {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() ->
-                        new RessourceNotFoundException("Employee is not found with id" + employeeId));
-        return
+                        new RessourceNotFoundException("Employee not found with id: " + employeeId));
+        employeeRepository.delete(employee);
+        return null;
     }
 }

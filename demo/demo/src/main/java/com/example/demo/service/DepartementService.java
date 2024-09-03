@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.EmployeeDto;
+import com.example.demo.dto.DepartementDto;
+
+import java.util.List;
 
 public interface DepartementService {
-    EmployeeDto createEmployee(EmployeeDto employeeDto);
-    EmployeeDto getEmployeeById(Long employeeId);
-    EmployeeDto getAllEmployees();
-    EmployeeDto updateEmployees(Long employeeId);
-    EmployeeDto deleteEmployees(Long employeeId);
+    DepartementDto createDepartement(DepartementDto departementDto);
+    DepartementDto getDepartementById(Long depId);
+    List<DepartementDto> getAllDepartements();
+    DepartementDto updateDepartement(Long depId, DepartementDto departementDto);
+    DepartementDto deleteDepartement(Long depId);
 }

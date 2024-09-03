@@ -11,7 +11,6 @@ import lombok.Setter;
 
 public class DepartementDto {
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String name;
+    private String description;
 }

@@ -2,10 +2,12 @@ package com.example.demo.service;
 
 import com.example.demo.dto.EmployeeDto;
 
+import java.util.List;
+
 public interface EmployeeService {
     EmployeeDto createEmployee(EmployeeDto employeeDto);
     EmployeeDto getEmployeeById(Long employeeId);
-    EmployeeDto getAllEmployees();
-    EmployeeDto updateEmployees(Long employeeId);
-    EmployeeDto deleteEmployees(Long employeeId);
+    List<EmployeeDto> getAllEmployees();
+    EmployeeDto updateEmployee(Long employeeId, EmployeeDto employeeDto);
+    EmployeeDto deleteEmployee(Long employeeId);
 }

@@ -1,53 +1,57 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.dto.DepartementDto;
 import com.example.demo.dto.EmployeeDto;
-import com.example.demo.service.EmployeeService;
+import com.example.demo.service.DepartementService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/employees")
+@RequestMapping("/api/Departements")
 public class DepartementController {
 
-    private EmployeeService employeeService;
+    private DepartementService departementService;
 
     @PostMapping
-    public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto)
+    public ResponseEntity<DepartementDto> createDepartement(@RequestBody DepartementDto departementDto)
     {
-        EmployeeDto savedEmployee = employeeService.createEmployee(employeeDto);
-        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+        DepartementDto savedDepartement = departementService.createDepartement(departementDto);
+        return new ResponseEntity<>(savedDepartement, HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long employeeId)
+    public ResponseEntity<DepartementDto> getDepartementById(@PathVariable("id") Long DepartementId)
     {
-        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
-        return ResponseEntity.ok(employeeDto);
+        DepartementDto DepartementDto = departementService.getDepartementById(DepartementId);
+        return ResponseEntity.ok(DepartementDto);
     }
 
     @GetMapping
-    public ResponseEntity<EmployeeDto> getAllEmployees()
+    public ResponseEntity<List<DepartementDto>> getAllDepartements()
     {
-        EmployeeDto employeeDto = employeeService.getAllEmployees();
-        return ResponseEntity.ok(employeeDto);
+        List<DepartementDto> departementList = departementService.getAllDepartements();
+        return ResponseEntity.ok(departementList);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<EmployeeDto> updateEmployees(@PathVariable("id") Long employeeId)
+    @PutMapping("{id}")
+    public ResponseEntity<DepartementDto> updateDepartement(@PathVariable("id") Long depId,
+                                                              @RequestBody DepartementDto departementDto)
     {
-        EmployeeDto employeeDto = employeeService.updateEmployees(employeeId);
-        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+        DepartementDto updatedDepartement = departementService.updateDepartement(depId,departementDto);
+        return ResponseEntity.ok(updatedDepartement);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<EmployeeDto> deleteEmployees(@PathVariable("id")Long employeeId)
+    @DeleteMapping("{id}")
+    public ResponseEntity<DepartementDto> deleteDepartement(@PathVariable("id")Long depId)
     {
-        EmployeeDto employeeDto = employeeService.deleteEmployees(employeeId);
-        return ResponseEntity.ok(employeeDto);
+        DepartementDto departementDto = departementService.deleteDepartement(depId);
+        return ResponseEntity.ok(departementDto);
     }
 }

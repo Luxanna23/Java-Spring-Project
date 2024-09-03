@@ -19,7 +19,7 @@ public class Departement {
     private Long id;
 
     @Column(name = "department_name")
-    private String departmentName;
+    private String name;
 
     @Column(name = "description")
     private String description;

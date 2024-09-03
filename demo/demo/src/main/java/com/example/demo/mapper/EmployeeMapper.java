@@ -3,14 +3,28 @@ package com.example.demo.mapper;
 import com.example.demo.dto.EmployeeDto;
 import com.example.demo.entity.Employee;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmployeeMapper {
     public static EmployeeDto maptoEmployeeDto(Employee employee){
         return new EmployeeDto(
                 employee.getId(),
                 employee.getFirstName(),
                 employee.getLastName(),
-                employee.getEmail()
+                employee.getEmail(),
+                employee.getDepartementId()
         );
+    }
+
+    public static List<EmployeeDto> maptoEmployeeListDto(List<Employee> employeeList)
+    {
+        List<EmployeeDto> employeeListDto = new ArrayList<>();
+        for (Employee employee: employeeList
+        ) {
+            employeeListDto.add(maptoEmployeeDto(employee));
+        }
+        return employeeListDto;
     }
 
     public static Employee maptoEmployee(EmployeeDto employeeDto){
@@ -19,6 +33,7 @@ public class EmployeeMapper {
         employee.setFirstName(employeeDto.getFirstName());
         employee.setLastName(employeeDto.getLastName());
         employee.setEmail(employeeDto.getEmail());
+        employee.setDepartementId(employeeDto.getDepartementId());
         return employee;
     }
 
