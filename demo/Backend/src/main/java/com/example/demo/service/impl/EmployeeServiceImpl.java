@@ -1,9 +1,11 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.EmployeeDto;
+import com.example.demo.entity.Departement;
 import com.example.demo.entity.Employee;
 import com.example.demo.exception.RessourceNotFoundException;
 import com.example.demo.mapper.EmployeeMapper;
+import com.example.demo.repository.DepartementRepository;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -16,11 +18,19 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
+    private DepartementRepository departementRepository;
     private EmployeeRepository employeeRepository;
 
     @Override
     public EmployeeDto createEmployee(EmployeeDto employeeDto){
         Employee employee = EmployeeMapper.maptoEmployee(employeeDto);
+
+        Departement departement = departementRepository.findById(Long.valueOf(employeeDto.getDepartementId()))
+                .orElseThrow(() ->
+                        new RessourceNotFoundException("Department is not exists with id: " + employeeDto.getDepartementId()));
+
+        employee.setDepartement(departement);
+
         Employee savedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.maptoEmployeeDto(savedEmployee);
     }
@@ -51,7 +61,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setFirstName(employeeDto.getFirstName());
         employee.setLastName(employeeDto.getLastName());
         employee.setEmail(employeeDto.getEmail());
-        employee.setDepartementId(employeeDto.getDepartementId());
+
+        Departement departement = departementRepository.findById(employeeDto.getDepartementId())
+                .orElseThrow(() ->
+                        new RessourceNotFoundException("Departement not found."));
+
+        employee.setDepartement(departement);
 
         Employee updatedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.maptoEmployeeDto(updatedEmployee);

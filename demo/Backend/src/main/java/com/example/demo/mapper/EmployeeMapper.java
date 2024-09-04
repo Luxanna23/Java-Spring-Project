@@ -1,6 +1,8 @@
 package com.example.demo.mapper;
 
+import com.example.demo.dto.DepartementDto;
 import com.example.demo.dto.EmployeeDto;
+import com.example.demo.entity.Departement;
 import com.example.demo.entity.Employee;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ public class EmployeeMapper {
                 employee.getFirstName(),
                 employee.getLastName(),
                 employee.getEmail(),
-                employee.getDepartementId()
+                employee.getDepartement().getId()
         );
     }
 
@@ -33,7 +35,6 @@ public class EmployeeMapper {
         employee.setFirstName(employeeDto.getFirstName());
         employee.setLastName(employeeDto.getLastName());
         employee.setEmail(employeeDto.getEmail());
-        employee.setDepartementId(employeeDto.getDepartementId());
         return employee;
     }
 

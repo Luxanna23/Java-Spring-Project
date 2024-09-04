@@ -1,14 +1,18 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import HomePage from './pages/Employee';
-import AboutPage from './pages/Departement';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import EmployeePage from './pages/EmployeePage';
+import DepartementPage from './pages/DepartementPage';
+import HomePage from './pages/HomePage';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/employee" component={EmployeePage} />
-        <Route path="/departement" component={DepartementPage} />
-      </Switch>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/employee" element={<EmployeePage />} />
+        <Route path="/departement" element={<DepartementPage />} />
+      </Routes>
     </Router>
   );
 }
