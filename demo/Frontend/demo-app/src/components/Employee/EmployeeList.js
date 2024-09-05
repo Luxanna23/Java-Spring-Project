@@ -13,15 +13,36 @@ function EmployeeList() {
   return (
     <div className="container">
       <h2>Employee Liste</h2>
-      <ul>
-        {employees.map(employee => (
-          <li key={employee.id}> 
-                {employee.firstName} {employee.lastName}
-                {/* <button onClick={() => updateEmployee(employee.id)}>Update</button> */}
-                {/* <button onClick={() => deleteEmployee(employee.id)}>Delete</button> */}
-          </li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Id Department</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {employees.map(employee => (
+            <tr key={employee.id}>
+              <td>{employee.id}</td>
+              <td>{employee.firstName}</td>
+              <td>{employee.lastName}</td>
+              <td>{employee.email}</td>
+              <td>{employee.department_id}</td>
+              {/* <td><button onClick={() => updateEmployee(employee.id)}>Update</button></td>
+              <td><button onClick={() => deleteEmployee(employee.id)}>Delete</button></td> */}
+              <td>
+                <button>Update</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -12,7 +12,7 @@ function Navbar() {
           <Link to="/employee">Employees</Link>
         </li>
         <li className="navbar-item">
-          <Link to="/departement">Departements</Link>
+          <Link to="/department">Departements</Link>
         </li>
       </ul>
     </nav>

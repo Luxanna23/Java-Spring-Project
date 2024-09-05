@@ -1,5 +1,40 @@
 /* styles.css */
 
+/*pour les tables */ 
+
+.table-container {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
 /* Général */
 body {
     font-family: Arial, sans-serif;
@@ -114,3 +149,4 @@ body {
   .employee-list li:hover {
     background-color: #f0f0f0;
   }
+  
